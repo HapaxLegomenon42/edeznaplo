@@ -170,7 +170,7 @@ tr:hover td{background:var(--blubg)}
   </div>
 
   <div style="text-align:center;margin-top:.85rem;padding-top:.75rem;border-top:1px solid var(--brd);font-size:11px;color:var(--muted)">
-    Demo: <b style="color:var(--text)">admin/admin123</b> · <b style="color:var(--text)">edzo/edzo123</b> · <b style="color:var(--text)">kovacs.peter/vivo123</b>
+    Demo: <b style="color:var(--text)">admin / admin123</b> · <b style="color:var(--text)">edzo / edzo123</b> · <b style="color:var(--text)">kovacs.peter / vivo123</b>
   </div>
 </div>
 </div>
@@ -190,7 +190,6 @@ tr:hover td{background:var(--blubg)}
 </div>
 
 <script>
-// ══ MINDEN FÜGGVÉNY GLOBÁLIS SCOPE-BAN ══
 var NS='GV13_';
 function LD(k,d){try{var v=localStorage.getItem(NS+k);return v!==null?JSON.parse(v):d}catch(e){return d}}
 function SV(k,v){try{localStorage.setItem(NS+k,JSON.stringify(v))}catch(e){}}
@@ -202,28 +201,28 @@ var HON=['Január','Február','Március','Április','Május','Június','Július'
 var TCAT={bemelegites:'Bemelegítés',vivas:'Vívás',fizikai:'Fizikai edzés',regeneracio:'Regeneráció',egyeb:'Egyéb'};
 
 var ALAP=[
-  {id:'a1',nev:'Bemelegítés / Nyújtás',kat:'bemelegites',szin:'#F59E0B',p:false},
-  {id:'a2',nev:'Iskola (Lektion)',kat:'vivas',szin:'#2563A8',p:false},
-  {id:'a3',nev:'Lábmunka',kat:'vivas',szin:'#7C3AED',p:false},
-  {id:'a4',nev:'Szabad vívás',kat:'vivas',szin:'#DC2626',p:true},
-  {id:'a5',nev:'Páros gyakorlat',kat:'vivas',szin:'#DB2777',p:true},
-  {id:'a6',nev:'Mérkőzés',kat:'vivas',szin:'#B91C1C',p:true},
-  {id:'a7',nev:'Állóképességi futás',kat:'fizikai',szin:'#059669',p:false},
-  {id:'a8',nev:'Sprinting',kat:'fizikai',szin:'#10B981',p:false},
-  {id:'a9',nev:'Erőedzés',kat:'fizikai',szin:'#0891B2',p:false},
-  {id:'a10',nev:'Köredzés',kat:'fizikai',szin:'#0284C7',p:false},
-  {id:'a11',nev:'Ugrókötel',kat:'fizikai',szin:'#16A34A',p:false},
-  {id:'a12',nev:'Úszás',kat:'fizikai',szin:'#0EA5E9',p:false},
-  {id:'a13',nev:'Törzsstabilizáció',kat:'fizikai',szin:'#6D28D9',p:false},
-  {id:'a14',nev:'Nyújtás / Stretching',kat:'regeneracio',szin:'#D97706',p:false},
-  {id:'a15',nev:'Hűvösítés / Levezetés',kat:'regeneracio',szin:'#92400E',p:false},
-  {id:'a16',nev:'Fizioterápia',kat:'regeneracio',szin:'#B45309',p:false},
-  {id:'a17',nev:'Egyéb',kat:'egyeb',szin:'#6B7280',p:false}
+  {id:'a1',nev:'Bemelegítés / Nyújtás',kat:'bemelegites',szin:#F59E0B,p:false},
+  {id:'a2',nev:'Iskola (Lektion)',kat:'vivas',szin:#2563A8,p:false},
+  {id:'a3',nev:'Lábmunka',kat:'vivas',szin:#7C3AED,p:false},
+  {id:'a4',nev:'Szabad vívás',kat:'vivas',szin:#DC2626',p:true},
+  {id:'a5',nev:'Páros gyakorlat',kat:'vivas',szin:#DB2777',p:true},
+  {id:'a6',nev:'Mérkőzés',kat:'vivas',szin:#B91C1C',p:true},
+  {id:'a7',nev:'Állóképességi futás',kat:'fizikai',szin:#059669',p:false},
+  {id:'a8',nev:'Sprinting',kat:'fizikai',szin:#10B981',p:false},
+  {id:'a9',nev:'Erőedzés',kat:'fizikai',szin:#0891B2',p:false},
+  {id:'a10',nev:'Köredzés',kat:'fizikai',szin:#0284C7',p:false},
+  {id:'a11',nev:'Ugrókötel',kat:'fizikai',szin:#16A34A',p:false},
+  {id:'a12',nev:'Úszás',kat:'fizikai',szin:#0EA5E9',p:false},
+  {id:'a13',nev:'Törzsstabilizáció',kat:'fizikai',szin:#6D28D9',p:false},
+  {id:'a14',nev:'Nyújtás / Stretching',kat:'regeneracio',szin:#D97706',p:false},
+  {id:'a15',nev:'Hűvösítés / Levezetés',kat:'regeneracio',szin:#92400E',p:false},
+  {id:'a16',nev:'Fizioterápia',kat:'regeneracio',szin:#B45309',p:false},
+  {id:'a17',nev:'Egyéb',kat:'egyeb',szin:#6B7280',p:false}
 ];
 
 var DB={u:LD('u',[]),v:LD('v',[]),e:LD('e',[]),t:LD('t',[]),o:LD('o',{}),p:LD('p',[])};
 
-if(DB.u.length===0){
+function initDB(){
   DB.u=[
     {id:'admin',username:'admin',password:'admin123',nev:'Adminisztrátor',role:'admin'},
     {id:'edzo1',username:'edzo',password:'edzo123',nev:'Bujdosó Imre',role:'edzo'},
@@ -248,7 +247,10 @@ if(DB.u.length===0){
   SA();
 }
 
-// HELPERS
+if(DB.u.length===0){
+  initDB();
+}
+
 function TI(s){return new Date(s+'T12:00:00')}
 function ISO(){return new Date().toISOString().slice(0,10)}
 function IW(d){var j=new Date(d.getFullYear(),0,1),dw=j.getDay()||7;return Math.ceil((Math.floor((d-j)/86400000)+dw)/7)}
@@ -259,7 +261,6 @@ function WD(yr,wk){
 }
 function KOR(ev){
   if(!ev)return'–';var e=+ev;if(isNaN(e))return'–';
-  var now=new Date(),ref=now>=new Date(now.getFullYear(),4,1)?now.getFullYear():now.getFullYear()-1;
   if(e<=2006)return'Felnőtt';if(e<=2009)return'Junior';if(e<=2011)return'Kadét';
   if(e===2012)return'Serdülő';if(e===2013)return'Újonc';if(e===2014)return'Gyermek';return'Bambi';
 }
@@ -297,12 +298,10 @@ function showT(msg,bg){
   setTimeout(function(){t.style.display='none'},2500);
 }
 
-// STATE
 var CU=null,lastDel=null,editId=null;
 var eView='heti',eWS=null,eDI=ISO(),eMo=new Date();
 var vWS=null,vMo=new Date();
 
-// AUTH
 function toggleReg(){
   var f=document.getElementById('REGFORM');
   var show=f.style.display==='none';
@@ -323,7 +322,6 @@ function doLogin(){
   err.style.display='none';
   var found=DB.u.find(function(u){return u.username.toLowerCase()===un&&u.password===pw});
   if(!found){
-    // JAVÍTVA: v.aktiv helyett v.aktiv (rövid i-vel) hogy egyezzen a DB struktúrával
     var vobj=DB.v.find(function(v){return v.aktiv===true&&v.username&&v.username.toLowerCase()===un&&v.password===pw});
     if(vobj)found=Object.assign({},vobj,{role:'vivo',vivoId:vobj.id});
   }
@@ -368,7 +366,6 @@ function doLogout(){
   document.getElementById('REGFORM').style.display='none';
 }
 
-// TABS
 function SS(id){
   document.querySelectorAll('.sec').forEach(function(s){s.classList.remove('on')});
   document.querySelectorAll('.nt').forEach(function(t){t.classList.remove('on')});
@@ -392,7 +389,6 @@ function bindNT(){
   });
 }
 
-// EDZŐI APP
 function buildEdzoApp(){
   var pend=DB.p.length;
   document.getElementById('NAV').innerHTML=
@@ -430,10 +426,10 @@ function buildEN(){
       (eView==='heti'?'<button class="btn bo bsm" id="EWPREV">◀</button><span id="EWL" style="font-size:12px;font-weight:600;color:var(--text2)"></span><button class="btn bo bsm" id="EWNEXT">▶</button>':'') +
       (eView==='honapi'?'<button class="btn bo bsm" id="EMPREV">◀</button><span id="EML" style="font-size:12px;font-weight:600;color:var(--text2)"></span><button class="btn bo bsm" id="EMNEXT">▶</button>':'') +
       '<button class="btn bo bsm" id="EMABTN">Ma</button>'+
+      '<button class="btn br bsm" id="RESETDBBTN" style="margin-left:auto">🔄 Demo Visszaállítás</button>'+
     '</div>'+
     '<div id="ENC"></div>';
 
-  // bind events
   var evf=document.getElementById('EVF');if(evf)evf.addEventListener('change',function(){buildEN()});
   var epd=document.getElementById('EDP');if(epd)epd.addEventListener('change',function(){eDI=this.value;buildEN()});
   var ep=document.getElementById('EWPREV');if(ep)ep.addEventListener('click',function(){shEW(-1)});
@@ -444,6 +440,7 @@ function buildEN(){
   var evnapi=document.getElementById('EVNAPI');if(evnapi)evnapi.addEventListener('click',function(){eView='napi';buildEN()});
   var evheti=document.getElementById('EVHETI');if(evheti)evheti.addEventListener('click',function(){eView='heti';buildEN()});
   var evhonap=document.getElementById('EVHONAP');if(evhonap)evhonap.addEventListener('click',function(){eView='honapi';buildEN()});
+  var rdb=document.getElementById('RESETDBBTN');if(rdb)rdb.addEventListener('click',function(){if(confirm('Biztosan visszaállítod az alaphelyzetet? Minden saját rögzítés elveszik.')){initDB();buildEdzoApp();showT('✓ Adatbázis visszaállítva!');}});
 
   if(eView==='napi')rENapi();else if(eView==='heti')rEHeti();else rEHonap();
 }
@@ -503,7 +500,6 @@ function rEHeti(){
     '<div class="stat"><div class="sv">'+Math.round(tp/60*10)/10+'</div><div class="sl">Összes óra</div></div>'+
     '<div class="stat"><div class="sv">'+aktE.flatMap(function(e){return e.tevek}).length+'</div><div class="sl">Tevékenységek</div></div></div>';
   el.innerHTML=h;
-  // bind day clicks
   days.forEach(function(day){
     var iso=day.toISOString().slice(0,10);
     var dcl=document.getElementById('DCL_'+iso);
@@ -511,7 +507,6 @@ function rEHeti(){
   });
 }
 
-// ÖSSZESÍTŐ
 function eOH(){return'<div class="fb" style="margin-bottom:.65rem"><div class="pg">Összesítő</div>'+
   '<div class="fx" style="flex-wrap:wrap;gap:4px">'+
   '<select id="OSH" style="width:145px"><option value="osszes">Teljes időszak</option></select>'+
@@ -592,7 +587,6 @@ function rEHonap(){
     '</div>';
   }
   h+='</div>';el.innerHTML=h;
-  // bind clicks
   for(var j=1;j<=ll.getDate();j++){
     (function(dn2){
       var iso2=yr+'-'+String(mo+1).padStart(2,'0')+'-'+String(dn2).padStart(2,'0');
@@ -602,7 +596,6 @@ function rEHonap(){
   }
 }
 
-// VÍVÓK
 function eVH(){return'<div class="fb" style="margin-bottom:.75rem"><div class="pg">Vívók</div><button class="btn bp bsm" id="SHOWAVBTN">+ Vívó felvétele</button></div>'+
   '<div id="EAVF" class="card" style="display:none;margin-bottom:.85rem;border-color:var(--c3)">'+
   '<div class="ct">Vívó manuális felvétele</div>'+
@@ -626,7 +619,7 @@ function eMentV(){
   var un=document.getElementById('NVUN').value.trim().toLowerCase(),pw=document.getElementById('NVPW').value;
   if(!vez||!ker){showT('⚠ Hiányzó név!','#C0392B');return}
   if(pw.length<6){showT('⚠ Jelszó min. 6 karakter!','#C0392B');return}
-  if(DB.v.find(function(v){return v.username&&v.username.toLowerCase()===un})||DB.u.find(function(u){return u.username.toLowerCase()===un})){showT('⚠ Foglalt!','#C0392B');return}
+  if(DB.v.find(function(v){return v.username&&v.username.toLowerCase()===un})||DB.u.find(function(u){return u.username.toLowerCase()===u})){showT('⚠ Foglalt!','#C0392B');return}
   DB.v.push({id:'v'+Date.now(),username:un,password:pw,nev:vez+' '+ker,ev:document.getElementById('NVE').value,szakag:document.getElementById('NVS').value,email:document.getElementById('NVEM').value,edzoId:document.getElementById('NVED').value,aktiv:true});
   SA();['NVV','NVK','NVE','NVEM','NVUN','NVPW'].forEach(function(id){document.getElementById(id).value=''});
   renderEV();eHideAV();showT('✓ Vívó hozzáadva!');
@@ -635,7 +628,6 @@ function eTogV(id){var v=DB.v.find(function(v){return v.id===id});if(!v)return;v
 function eDelV(id){if(!confirm('Biztosan törlöd?'))return;DB.v=DB.v.filter(function(v){return v.id!==id});SA();renderEV()}
 function renderEV(){
   var el=document.getElementById('EVL');if(!el)return;
-  // bind new buttons
   var sab=document.getElementById('SHOWAVBTN');if(sab)sab.addEventListener('click',eShowAV);
   var hab=document.getElementById('HIDEAVBTN');if(hab)hab.addEventListener('click',eHideAV);
   var mab=document.getElementById('MENTAVBTN');if(mab)mab.addEventListener('click',eMentV);
@@ -656,12 +648,10 @@ function renderEV(){
       '<button class="btn bsm '+(v.aktiv?'ba':'bg2')+'" data-togv="'+v.id+'">'+(v.aktiv?'Letilt':'Aktivál')+'</button>'+
       '<button class="btn bsm br" data-delv="'+v.id+'">×</button></div>';
   }).join('');
-  // bind dynamic buttons
   el.querySelectorAll('[data-togv]').forEach(function(b){b.addEventListener('click',function(){eTogV(this.getAttribute('data-togv'))})});
   el.querySelectorAll('[data-delv]').forEach(function(b){b.addEventListener('click',function(){eDelV(this.getAttribute('data-delv'))})});
 }
 
-// FELHASZNÁLÓK
 function eFH(){return'<div class="pg" style="margin-bottom:.75rem">Felhasználókezelés</div><div id="EFD"></div>'}
 function renderEF(){
   var el=document.getElementById('EFD');if(!el)return;
@@ -694,7 +684,6 @@ function renderEF(){
     '<div class="fx fe" style="gap:5px;margin-top:.35rem"><button class="btn bo bsm" id="HIDEAEFBTN">Mégse</button><button class="btn bp bsm" id="MENTEDZBTN">Mentés</button></div></div>'+
     '<div class="g2" id="EL"></div></div>';
 
-  // bind
   var pl=document.getElementById('PL');
   if(pl){
     pl.querySelectorAll('[data-app]').forEach(function(b){b.addEventListener('click',function(){appP(this.getAttribute('data-app'))})});
@@ -743,7 +732,6 @@ function renderEL(){
   el.querySelectorAll('[data-deledzo]').forEach(function(b){b.addEventListener('click',function(){delEdzo(this.getAttribute('data-deledzo'))})});
 }
 
-// TEVÉKENYSÉGLISTA
 function tLH(isE){return'<div class="fb" style="margin-bottom:.75rem"><div class="pg">Tevékenységlista</div>'+
   '<span style="font-size:11px;color:var(--muted)">'+(isE?'Szín és partner szerkeszthető':'Új tevékenységet adhatsz hozzá')+'</span></div>'+
   '<div class="g2">'+
@@ -796,7 +784,6 @@ function editTev(id){
 function resetA(id){delete DB.o[id];SA();renderTL(true);showT('↩ Visszaállítva!')}
 function renderTL(isE){
   var el=document.getElementById('TL');if(!el)return;
-  // bind add button
   var ab=document.getElementById('ADDCTBTN');if(ab){ab.removeEventListener('click',addCT);ab.addEventListener('click',addCT)}
   var all=AT(),cats={};all.forEach(function(t){if(!cats[t.kat])cats[t.kat]=[];cats[t.kat].push(t)});
   el.innerHTML=Object.keys(cats).map(function(k){return'<div style="margin-bottom:.75rem">'+
@@ -814,7 +801,6 @@ function renderTL(isE){
   el.querySelectorAll('[data-delct2]').forEach(function(b){b.addEventListener('click',function(){delCT(this.getAttribute('data-delct2'))})});
 }
 
-// VÍVÓI APP
 function buildVivoApp(){
   document.getElementById('NAV').innerHTML=mkNT('VN','📋 Edzésnapló')+mkNT('VH','📅 Heti')+mkNT('VM','🗓 Havi')+mkNT('VS','📊 Statisztikám')+mkNT('VT','⚙ Tevékenységek');
   document.getElementById('MAIN').innerHTML=
@@ -871,7 +857,6 @@ function renderVN(){
     '<div style="font-size:14px;font-weight:700;color:var(--c1);margin-bottom:.5rem">Bejegyzéseim</div>'+
     '<div id="VLL"></div>';
 
-  // bind
   var vdi=document.getElementById('VDI');if(vdi)vdi.addEventListener('change',vOnDate);
   var vpih=document.getElementById('VPIH');if(vpih)vpih.addEventListener('change',vTogPih);
   var atb=document.getElementById('ADDTEVBTN');if(atb)atb.addEventListener('click',function(){vAddTev()});
@@ -1081,7 +1066,6 @@ function renderVS(){
     }).join('')+'</tbody></table></div></div>';
 }
 
-// EXPORT CSV
 function expCSV(){
   var rows=[['Dátum','Nap','Hét','Vívó','Szakág','Korosztály','Edző','Napszak','Helyszín','Éb.pulzus','Tevékenységek','Össz.perc','Megjegyzés']];
   DB.e.forEach(function(e){
@@ -1095,7 +1079,6 @@ function expCSV(){
   a.download='gerevich-edzesnaplo.csv';a.click();showT('✓ CSV letöltve!');
 }
 
-// INIT — event listenerek, NEM oncick attribútumok
 document.getElementById('LOGINBTN').addEventListener('click',doLogin);
 document.getElementById('LU').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
 document.getElementById('LP').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
